@@ -12,7 +12,9 @@ RUN go build -o main .
 
 FROM alpine
 
-RUN adduser -S -D -M -h /app appuser
+RUN apk add --no-cache shadow
+
+RUN adduser -S -D -h /app appuser
 
 USER  appuser
 
@@ -25,4 +27,3 @@ WORKDIR /app
 EXPOSE 3000  
  
 CMD ["./main"]
-

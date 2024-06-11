@@ -7,14 +7,14 @@ import (
 	"Shortify-service/database"
 )
 
-func ResolveURL(c *fiber.ctx) error {
+func ResolveURL(c *fiber.Ctx) error {
 	url := c.Params("url")
 
-	r := databse.CreateClient(0)
-	defer r.close()
+	r := database.CreateClient(0)
+	defer r.Close()
 	// Create databse
 
-	value, err := r.Get(database.Ctx, url).Resize()
+	value, err := r.Get(database.Ctx, url).Result()
 	// try to get value from DB
 	//ahndle error for not found and unable to connect
 	if err == redis.Nil {
@@ -27,11 +27,11 @@ func ResolveURL(c *fiber.ctx) error {
 		})
 	}
 
-	rInr := databse.CreateClient(1)
+	rInr := database.CreateClient(1)
 	defer rInr.Close()
 
 	_ = rInr.Incr(database.Ctx, "counters")
 
-	return c.Redrirect(value, 301)
+	return c.Redirect(value, 301)
 
 }
