@@ -1,8 +1,8 @@
 package routes
 
 import (
-	"github.com/go-redis/redis"
 	"github.com/gofiber/fiber/v2"
+	"github.com/redis/go-redis/v9"
 
 	"Shortify-service/database"
 )
