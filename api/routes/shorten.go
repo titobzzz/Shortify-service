@@ -62,25 +62,6 @@ func ShortenURL(c *fiber.Ctx) error {
 			})
 		}
 	}
-	//  else {
-	// 	val, _ = r2.Get(database.Ctx, c.IP()).Result()
-	// 	valInt, _ := strconv.Atoi(val)
-	// 	if valInt <= 0 {
-	// 		limit, _ := r2.TTL(database.Ctx, c.IP()).Result()
-	// 		if limit == -1 {
-	// 			// case where the key has no expiration time
-	// 			return c.Status(fiber.StatusServiceUnavailable).JSON(fiber.Map{
-	// 				"error":            "Rate limit exceeded",
-	// 				"rate_limit_reset": -1,
-	// 			})
-	// 		}
-
-	// 		return c.Status(fiber.StatusServiceUnavailable).JSON(fiber.Map{
-	// 			"error":            "Rate limit exceeded",
-	// 			"rate_limit_reset": limit / time.Nanosecond / time.Minute,
-	// 		})
-	// 	}
-	// }
 
 	//validate input as actual URL
 	if !govalidator.IsURL(body.URL) {
