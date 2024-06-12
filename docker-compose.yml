@@ -2,13 +2,19 @@ version: "3.9"
 
 services:
   api:
-    build: api
+    build: ./api
     ports:
       - "3000:3000"
     depends_on:
       - db
+    environment:
+      - DB_ADDR=${DB_ADDR}
+      - DB_PASS=${DB_PASS}
+      - APP_PORT=${APP_PORT}
+      - DOMAIN=${DOMAIN}
+      - API_QUOTA=${API_QUOTA}
   db:
-    build: db
+    image: redis:alpine
     ports:
       - "6379:6379"
     volumes:
